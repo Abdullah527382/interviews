@@ -1,4 +1,4 @@
-class LLNode<T> {
+export class LLNode<T> {
   data: T;
   next: LLNode<T> | null = null;
 
@@ -17,7 +17,7 @@ interface ILinkedList<T> {
   //   search(comparator: (data: T) => boolean): LLNode<T> | null;
 }
 
-class LinkedList<T> implements ILinkedList<T> {
+export class LinkedList<T> implements ILinkedList<T> {
   private head: LLNode<T> | null = null;
   constructor(data: T) {
     this.head = new LLNode(data);
@@ -87,25 +87,41 @@ class LinkedList<T> implements ILinkedList<T> {
     return null;
   }
 
+  public getHead(): LLNode<T> | null {
+    return this!.head;
+  }
+
+  public getNodeAtIndex(index: number): LLNode<T> | null {
+    let curr = this.head;
+    let count = 0;
+    while (curr != null && count < index) {
+      curr = curr!.next;
+      count++;
+    }
+    return curr;
+  }
+
   public toString() {
     let nodeData = "";
-    while (this.head != null) {
-      nodeData += this.head.data;
-      this.head = this.head.next;
+    let curr = this.head;
+    while (curr != null) {
+      nodeData += ", " + curr.data;
+      curr = curr.next;
     }
     return nodeData;
   }
 }
 
-let linkedList = new LinkedList<String>("Abdullah Ahmed");
-console.log(linkedList.traverse());
-console.log(linkedList.insertInBegin("Billy Bob"));
-console.log(linkedList.traverse());
-console.log(linkedList.insertAtEnd("Hej Monic"));
-console.log(linkedList.traverse());
-// linkedList.deleteNode("Hej Monic");
-console.log(linkedList.traverse());
-// linkedList.deleteNode("Abdullah Ahmed");
-console.log(linkedList.traverse());
-console.log(linkedList.size());
-console.log(linkedList.search((string) => string === "Abdullahh Ahmed"));
+// let linkedList = new LinkedList<String>("Abdullah Ahmed");
+// console.log(linkedList.traverse());
+// console.log(linkedList.insertInBegin("Billy Bob"));
+// console.log(linkedList.traverse());
+// console.log(linkedList.insertAtEnd("Hej Monic"));
+// console.log(linkedList.traverse());
+// // linkedList.deleteNode("Hej Monic");
+// console.log(linkedList.traverse());
+// // linkedList.deleteNode("Abdullah Ahmed");
+// console.log(linkedList.traverse());
+// console.log(linkedList.size());
+// console.log(linkedList.search((string) => string === "Abdullah Ahmed"));
+// console.log(linkedList.traverse());
