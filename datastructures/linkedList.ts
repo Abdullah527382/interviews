@@ -60,6 +60,32 @@ class LinkedList<T> implements ILinkedList<T> {
       curr = curr!.next;
     }
   }
+  /**
+   * @returns the size of the linked list
+   */
+  public size(): Number {
+    // Note: You can also save this to local state
+    let size = 0;
+    let curr = this.head;
+    while (curr != null) {
+      size++;
+      curr = curr.next;
+    }
+    return size;
+  }
+  /**
+   *
+   * @param comparator is a callback function specifying what data value we are searching for
+   * @returns an LLNode if found data match, else returns null
+   */
+  public search(comparator: (data: T) => boolean): LLNode<T> | null {
+    let curr = this.head;
+    while (curr != null) {
+      if (comparator(curr.data)) return curr;
+      curr = curr.next;
+    }
+    return null;
+  }
 
   public toString() {
     let nodeData = "";
@@ -77,7 +103,9 @@ console.log(linkedList.insertInBegin("Billy Bob"));
 console.log(linkedList.traverse());
 console.log(linkedList.insertAtEnd("Hej Monic"));
 console.log(linkedList.traverse());
-linkedList.deleteNode("Hej Monic");
+// linkedList.deleteNode("Hej Monic");
 console.log(linkedList.traverse());
-linkedList.deleteNode("Abdullah Ahmed");
+// linkedList.deleteNode("Abdullah Ahmed");
 console.log(linkedList.traverse());
+console.log(linkedList.size());
+console.log(linkedList.search((string) => string === "Abdullahh Ahmed"));
